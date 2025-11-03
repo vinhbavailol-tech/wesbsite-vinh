@@ -1,156 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
-    <title>Mô Phỏng Vật Lý 3D Đơn Giản</title>
-    <style>
-        body { margin: 0; overflow: hidden; }
-        canvas { display: block; }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Web Giới Thiệu Của [Tên Bạn]</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/kripken/ammo.js@latest/builds/ammo.js"></script>
-    
-    <script>
-        // Khởi tạo Ammo.js trước
-        Ammo().then(function (Ammo) {
-            
-            // --- 1. Thiết lập Scene, Camera, và Renderer ---
-            const scene = new THREE.Scene();
-            scene.background = new THREE.Color(0x87ceeb); // Màu trời xanh
-            
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.set(0, 5, 10);
-            camera.lookAt(0, 0, 0);
+    <header>
+        <h1>Xin Chào, Tôi Là [Tên Bạn]!</h1>
+        <p>Đây là nơi tôi thể hiện sự 'cool' của mình.</p>
+    </header>
 
-            const renderer = new THREE.WebGLRenderer({ antialias: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.shadowMap.enabled = true; // Bật đổ bóng
-            document.body.appendChild(renderer.domElement);
-
-            // --- 2. Thiết lập Vật lý (Ammo.js) ---
-            const physicsWorld = setupPhysicsWorld();
-            const rigidBodies = [];
-            const clock = new THREE.Clock();
-
-            function setupPhysicsWorld() {
-                // Cấu hình vật lý cơ bản
-                const collisionConfiguration = new Ammo.btDefaultCollisionConfiguration();
-                const dispatcher = new Ammo.btCollisionDispatcher(collisionConfiguration);
-                const overlappingPairCache = new Ammo.btDbvtBroadphase();
-                const solver = new Ammo.btSequentialImpulseConstraintSolver();
-                const dynamicsWorld = new Ammo.btDiscreteDynamicsWorld(dispatcher, overlappingPairCache, solver, collisionConfiguration);
-                dynamicsWorld.setGravity(new Ammo.btVector3(0, -9.82, 0)); // Trọng lực
-                return dynamicsWorld;
-            }
-
-            // --- 3. Ánh sáng ---
-            const ambientLight = new THREE.AmbientLight(0x404040, 5); // Ánh sáng môi trường
-            scene.add(ambientLight);
-
-            const dirLight = new THREE.DirectionalLight(0xffffff, 5);
-            dirLight.position.set(-10, 10, 10);
-            dirLight.castShadow = true;
-            dirLight.shadow.mapSize.width = 1024;
-            dirLight.shadow.mapSize.height = 1024;
-            dirLight.shadow.camera.near = 0.5;
-            dirLight.shadow.camera.far = 50;
-            scene.add(dirLight);
-
-            // --- 4. Tạo Mặt đất (Địa hình tĩnh) ---
-            const groundMass = 0; // Khối lượng bằng 0 nghĩa là tĩnh
-            const groundGeometry = new THREE.BoxGeometry(50, 1, 50);
-            const groundMaterial = new THREE.MeshLambertMaterial({ color: 0x666666 });
-            const groundMesh = new THREE.Mesh(groundGeometry, groundMaterial);
-            groundMesh.position.set(0, -0.5, 0);
-            groundMesh.receiveShadow = true;
-            scene.add(groundMesh);
-
-            createPhysicsMesh(groundMesh, groundMass);
-
-            // --- 5. Tạo Khối lập phương (Phương tiện/Nhân vật đơn giản) ---
-            const boxMass = 1; // Khối lượng có thể di chuyển
-            const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
-            const boxMaterial = new THREE.MeshLambertMaterial({ color: 0xff0000 });
-            const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
-            boxMesh.position.set(0, 5, 0);
-            boxMesh.castShadow = true;
-            scene.add(boxMesh);
-
-            const boxBody = createPhysicsMesh(boxMesh, boxMass);
-
-            // --- 6. Hàm tạo đối tượng vật lý ---
-            function createPhysicsMesh(mesh, mass) {
-                const shape = mesh.geometry.parameters;
-                let size = new THREE.Vector3(shape.width, shape.height, shape.depth);
+    <main>
+        <section id="gioi-thieu">
+            <div class="profile-card">
+                <img src="anh-dai-dien.jpg" alt="Ảnh Đại Diện Của [Tên Bạn]" class="profile-img"> 
                 
-                // Thiết lập hình dạng va chạm (BoxShape)
-                const transform = new Ammo.btTransform();
-                transform.setIdentity();
-                transform.setOrigin(new Ammo.btVector3(mesh.position.x, mesh.position.y, mesh.position.z));
-                transform.setRotation(new Ammo.btQuaternion(0, 0, 0, 1));
-                const motionState = new Ammo.btDefaultMotionState(transform);
+                <h2>Giới Thiệu Chung</h2>
+                <p>Tôi là một [Nghề nghiệp/Vai trò của bạn, ví dụ: Lập trình viên tập sự, Sinh viên năm cuối, Người đam mê cà phê...] với [Số năm] năm kinh nghiệm (hoặc niềm đam mê cháy bỏng) trong lĩnh vực [Lĩnh vực của bạn]. Tôi tin rằng [Một câu nói/triết lý của bạn].</p>
+            </div>
+        </section>
 
-                const btSize = new Ammo.btVector3(size.x * 0.5, size.y * 0.5, size.z * 0.5);
-                const colShape = new Ammo.btBoxShape(btSize);
-                colShape.setMargin(0.05);
+        <section id="ky-nang">
+            <h2>Kỹ Năng Của Tôi</h2>
+            <ul class="skills-list">
+                <li>HTML & CSS (Vì đây là thứ tôi đang viết!)</li>
+                <li>[Kỹ năng 1, ví dụ: JavaScript]</li>
+                <li>[Kỹ năng 2, ví dụ: Python/Thiết kế đồ họa]</li>
+                <li>[Kỹ năng 3, ví dụ: Giải quyết vấn đề/Nấu ăn ngon]</li>
+            </ul>
+        </section>
 
-                const localInertia = new Ammo.btVector3(0, 0, 0);
-                if (mass !== 0) {
-                    colShape.calculateLocalInertia(mass, localInertia);
-                }
+        <section id="lien-he">
+            <h2>Kết Nối Với Tôi</h2>
+            <p>Đừng ngại ngùng, hãy gửi lời chào!</p>
+            <div class="contact-links">
+                <a href="mailto:emailcuaban@gmail.com">Email</a> | 
+                <a href="https://linkedin.com/in/ten-ban" target="_blank">LinkedIn</a> | 
+                <a href="https://github.com/ten-ban" target="_blank">GitHub</a>
+            </div>
+        </section>
+    </main>
 
-                const rigidBodyInfo = new Ammo.btRigidBodyConstructionInfo(mass, motionState, colShape, localInertia);
-                const body = new Ammo.btRigidBody(rigidBodyInfo);
-
-                physicsWorld.addRigidBody(body);
-                mesh.userData.physicsBody = body;
-                rigidBodies.push(mesh);
-                return body;
-            }
-
-            // --- 7. Vòng lặp Render/Animation ---
-            function animate() {
-                requestAnimationFrame(animate);
-
-                const deltaTime = clock.getDelta();
-                
-                // Bước vật lý
-                physicsWorld.stepSimulation(deltaTime, 10); 
-
-                // Đồng bộ hóa vị trí vật lý với đối tượng 3D
-                for (let i = 0; i < rigidBodies.length; i++) {
-                    const mesh = rigidBodies[i];
-                    const body = mesh.userData.physicsBody;
-                    
-                    const ms = body.getMotionState();
-                    if (ms) {
-                        ms.getWorldTransform(ammoTmpTransform);
-                        const p = ammoTmpTransform.getOrigin();
-                        const q = ammoTmpTransform.getRotation();
-                        mesh.position.set(p.x(), p.y(), p.z());
-                        mesh.quaternion.set(q.x(), q.y(), q.z(), q.w());
-                    }
-                }
-
-                renderer.render(scene, camera);
-            }
-
-            // Khởi tạo biến tạm thời cho Ammo.js
-            const ammoTmpTransform = new Ammo.btTransform();
-            
-            // Bắt đầu vòng lặp
-            animate();
-
-            // Xử lý thay đổi kích thước cửa sổ
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-
-        }); // End Ammo().then
-    </script>
+    <footer>
+        <p>&copy; 2025 | Được tạo ra với ☕ và một chút 'thông minh' của AI.</p>
+    </footer>
 </body>
 </html>
-
