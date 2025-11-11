@@ -3,37 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tiêu Đề Cấp 1</title>
+    <title>Chương trình Lớp 41T2</title>
     <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 40px; 
+            color: #333; 
+        }
+
+        /* 1. ĐỊNH DẠNG TIÊU ĐỀ H1 (YÊU CẦU ĐẶC BIỆT) */
         h1 {
-            /* Màu chữ đỏ */
-            color: #e74c3c; 
-            
-            /* Kích thước nhỏ (1.2 lần kích thước cơ bản) */
-            font-size: 1.2em; 
-            
-            /* Căn giữa */
-            text-align: center; 
-            
-            /* Phong chữ Arial */
-            font-family: Arial, sans-serif; 
-            
-            /* In nghiêng */
-            font-style: italic; 
-            
-            /* Thêm độ đậm để chữ nổi bật hơn một chút */
+            color: #e74c3c; /* Màu chữ đỏ */
+            font-size: 2.2em; /* Kích thước lớn để nổi bật */
+            text-align: center; /* Căn giữa */
+            font-family: Arial, sans-serif; /* Phông chữ Arial */
+            font-style: italic; /* In nghiêng */
             font-weight: bold;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #e74c3c; /* Đường viền đỏ phân cách */
+            margin-bottom: 40px;
         }
+
+        h2 { color: #2c3e50; margin-top: 30px; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
         
-        /* Đảm bảo nội dung nằm ở vị trí dễ nhìn */
-        body {
-            margin-top: 50px;
-        }
+        /* Định dạng Bảng Điểm */
+        table { border-collapse: collapse; width: 60%; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f2f2f2; color: #2c3e50; }
+        
+        /* Định dạng Form */
+        .form-section { border: 1px solid #3498db; padding: 20px; border-radius: 8px; background-color: #f9f9f9; }
+        .form-section input[type="submit"] { background-color: #3498db; color: white; padding: 10px 15px; border: none; cursor: pointer; border-radius: 5px; }
+        .form-section label { font-weight: bold; display: block; margin-top: 10px; }
     </style>
 </head>
 <body>
-    
+
     <h1>Tôi là học sinh lớp 41T2</h1>
+
+    ---
     
+    <h2>2. Thông báo từ Ban Cán sự Lớp</h2>
+    <p>Lớp 41T2 chúng ta sẽ tổ chức buổi học phụ đạo môn Toán vào chiều thứ Bảy tuần này. Đề nghị các bạn tham gia đầy đủ để cùng nhau ôn tập và nâng cao kiến thức trước kỳ thi giữa kỳ sắp tới. Việc học nhóm rất quan trọng để đảm bảo tất cả mọi người cùng tiến bộ.</p>
+    
+    ---
+
+    <h2>3. Danh sách Công việc Cần làm</h2>
+    <h3>Công việc theo thứ tự ưu tiên:</h3>
+    <ol>
+        <li>Hoàn thành bài tập lớn môn Lập trình.</li>
+        <li>Đăng ký thi IT .</li>
+        <li>Tổ chức hoạt động ngoại khóa cho cả lớp.</li>
+    </ol>
+    
+    ---
+
+    <h2>4. Bảng Điểm Thống kê Môn học</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Môn học</th>
+                <th>Tín chỉ</th>
+                <th>Giảng viên</th>
+                <th>Phòng học</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Cấu trúc Dữ liệu</td>
+                <td>3</td>
+                <td>Thầy Sơn</td>
+                <td>A201</td>
+            </tr>
+            <tr>
+                <td>Quản trị mạng website/td>
+                <td>2</td>
+                <td>Thầy Minh</td>
+                <td>B305</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    ---
+
+    <h2>5. Hình ảnh</h2>
+    <p>Hình ảnh buổi sinh hoạt lớp 41T2.</p>
+    <img src="hinh_anh_lop_hoc_tai_lieu_lop.jpg" alt="Ảnh kỷ niệm lớp 41T2" width="400">
+    
+    ---
+
+    <h2>10. Đăng ký Phản hồi Môn học</h2>
+    <div class="form-section">
+        <form action="/submit-feedback" method="post">
+            <label for="mon">Môn học cần góp ý:</label>
+            <input type="text" id="mon" name="mon" required><br>
+            
+            <label for="muc_do">Mức độ hài lòng:</label>
+            <select id="muc_do" name="muc_do">
+                <option value="rat_tot">Rất Tốt</option>
+                <option value="tot">Tốt</option>
+                <option value="binh_thuong">Bình thường</option>
+                <option value="can_cai_thien">Cần cải thiện</option>
+            </select><br><br>
+            
+            <label for="gop_y">Góp ý chi tiết cho lớp học:</label>
+            <textarea id="gop_y" name="gop_y" rows="4" cols="50"></textarea><br><br>
+            
+            <input type="submit" value="Gửi Phản hồi">
+        </form>
+    </div>
+
 </body>
 </html>
